@@ -30,18 +30,23 @@ class MyHomePageConstructor extends StatelessWidget {
             bottomRight: Radius.circular(30.0),
           ),
         ),
-        backgroundColor: Colors.transparent, // Torna a AppBar transparente.
+        backgroundColor: Color(0xFFed145b), // Torna a AppBar transparente.
         flexibleSpace: Container(
           padding: EdgeInsets.only(left: 5, bottom: 10, top: 10, right: 20),
           child: Row(
             children: <Widget>[
-              Expanded(
+              Container(
+                padding: EdgeInsets.only(left:20,right: 20),
+                child: 
+              Align(
+              
+                alignment: Alignment.bottomRight,
                 child: Image.asset(
                   'assets/asset/imgs/accounts_screens/user_icon.png',
                   width: 70,
                   height: 70,
                 ),
-              ),
+              ),),
               // Adiciona um espaço entre a imagem e o texto
               Align(
                 alignment: Alignment.bottomRight,
@@ -50,7 +55,7 @@ class MyHomePageConstructor extends StatelessWidget {
                   style: GoogleFonts.getFont(
                     'Lato',
                     fontSize: 30,
-                    textStyle: TextStyle(color: Color(0xFF333333)),
+                    textStyle: TextStyle(color: Color.fromARGB(255, 254, 255, 255)),
                   ),
                 ),
               ),
@@ -58,7 +63,9 @@ class MyHomePageConstructor extends StatelessWidget {
           ),
         ),
       ),
-      body: UserBodyConstructor(saldo: '30.000,00'),
+      body: 
+      UserBodyConstructor(saldo: '30.000,00'),
+      backgroundColor: Color.fromARGB(255, 254, 255, 255),
     );
   }
 }
@@ -73,14 +80,19 @@ class UserBodyConstructor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       padding: EdgeInsets.only(left: 20, bottom: 20, top: 20, right: 20),
       child: Column(
+        
         children: <Widget>[
           //saldo conta e valor
           Container( padding: EdgeInsets.only(left: 20, bottom: 20, top: 20, right: 20),
             child: Column(
+              
               children: [
+                
                 Row(
+                  
                   children: [
                     Text(
                       'Saldo Conta',
