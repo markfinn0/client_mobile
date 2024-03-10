@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/reuse_objects/button_home.dart';
 import 'package:flutter_application/reuse_objects/app_bar_default.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:flutter_application/reuse_objects/color_theme.dart';
+ThemeData theme = apptheme;
 class MyBenefitsPage extends StatelessWidget {
   const MyBenefitsPage({Key? key}) : super(key: key);
   //decorater
@@ -36,10 +37,10 @@ class MyBenefitsBodyPageConstructor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 20, bottom: 15, top: 15, right: 20),
+      padding: EdgeInsets.only(left: 20, bottom: 10, top: 10, right: 20),
       child: Column(
         children: <Widget>[
-          Container( padding: EdgeInsets.only(left: 20, bottom: 15, top: 15, right: 20),
+          Container( padding: EdgeInsets.only(left: 20, bottom: 10, top: 10, right: 20),
             child: Column(
               children: [
                 Row(
@@ -47,7 +48,7 @@ class MyBenefitsBodyPageConstructor extends StatelessWidget {
                     Text("Saldo Beneficios",
                         style: GoogleFonts.getFont('Lato',
                             fontSize: 30,
-                            textStyle: TextStyle(color: Color(0xFF333333)))),
+                            textStyle: TextStyle(color: theme.colorScheme.onPrimary))),
                   ],
                 ),
                 Row(
@@ -55,24 +56,24 @@ class MyBenefitsBodyPageConstructor extends StatelessWidget {
                     Text("R\$ $valueBenefits",
                         style: GoogleFonts.getFont('Lato',
                             fontSize: 20,
-                            textStyle: TextStyle(color: Color(0xFF333333)))),
+                            textStyle: TextStyle(color: theme.colorScheme.onPrimary))),
                   ],
                 ),
               ],
             ),
           ),
           
-          Container( padding: EdgeInsets.only(left: 20, bottom: 15, top: 15, right: 20),
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [UserButtonBodyConstructor(localIcon: 'assets/asset/imgs/accounts_screens/beneficios.png', textLabel: "Sacar Beneficios", widthBottton: 115.0,)],),
+          Container( padding: EdgeInsets.only(left: 20, bottom: 10, top: 10, right: 20),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [UserButtonBodyConstructor(localIcon: 'assets/asset/imgs/accounts_screens/beneficios.png', textLabel: "Sacar Beneficios",)],),
           ),
-          Container( padding: EdgeInsets.only(left: 20, bottom: 15, top: 15, right: 20),
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [UserButtonBodyConstructor(localIcon: 'assets/asset/imgs/benefits_screens/cash_out_benefits.png', textLabel: "Sacar Beneficios", widthBottton: 115.0,)],),
+          Container( padding: EdgeInsets.only(left: 20, bottom: 10, top: 10, right: 20),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [UserButtonBodyConstructor(localIcon: 'assets/asset/imgs/benefits_screens/cash_out_benefits.png', textLabel: "Sacar Beneficios",)],),
           ),
-          Container( padding: EdgeInsets.only(left: 20, bottom: 15, top: 15, right: 20),
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [UserButtonBodyConstructor(localIcon: 'assets/asset/imgs/accounts_screens/beneficios.png', textLabel: "Beneficios", widthBottton: 115.0,)],),
+          Container( padding: EdgeInsets.only(left: 20, bottom: 10, top: 10, right: 20),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [UserButtonBodyConstructor(localIcon: 'assets/asset/imgs/accounts_screens/beneficios.png', textLabel: "Beneficios",)],),
           ),
-          Container( padding: EdgeInsets.only(left: 20, bottom: 15, top: 15, right: 20),
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [UserButtonBodyConstructor(localIcon: 'assets/asset/imgs/benefits_screens/benefits_historic.png', textLabel: "Historico de Beneficios", widthBottton: 115.0,)],),
+          Container( padding: EdgeInsets.only(left: 20, bottom: 10, top: 10, right: 20),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [UserButtonBodyConstructor(localIcon: 'assets/asset/imgs/benefits_screens/benefits_historic.png', textLabel: "Historico de Beneficios",)],),
           ),
         
         ],

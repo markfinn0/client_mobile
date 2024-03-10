@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/reuse_objects/button_home.dart';
+import 'package:flutter_application/reuse_objects/screen_dimensions.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:flutter_application/reuse_objects/color_theme.dart';
 //component without state - statelessswidget
+ThemeData theme = apptheme;
+
 class MyHomePage extends StatelessWidget {
+  
   const MyHomePage({Key? key}) : super(key: key);
   //decorater
+  
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       title: 'Home page',
       home: MyHomePageConstructor(name: 'Vitor Manoel'),
@@ -21,85 +27,98 @@ class MyHomePageConstructor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenInfo screenInfo = getScreenInformation(context);
+    double appBarHeight = screenInfo.screenHeight * 0.2;
+    double sizeContainerInfoUser = appBarHeight * 0.7;
+    
+    print(sizeContainerInfoUser);
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 90,
-        elevation: 0.0, // Defina a elevação como 0 para remover a sombra.
+        toolbarHeight: appBarHeight,
+        elevation: 0.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(30.0),
           ),
         ),
-        backgroundColor: Color(0xFFed145b), // Torna a AppBar transparente.
-        flexibleSpace: Container(
-          padding: EdgeInsets.only(left: 5, bottom: 10, top: 10, right: 20),
+        backgroundColor: theme.colorScheme.secondary, 
+        flexibleSpace: Container( 
+         padding: EdgeInsets.only(left: 5, right: 20),
           child: Row(
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(left:20,right: 20),
-                child: 
-              Align(
-              
-                alignment: Alignment.bottomRight,
+              Expanded(
                 child: Image.asset(
                   'assets/asset/imgs/accounts_screens/user_icon.png',
-                  width: 70,
-                  height: 70,
-                ),
-              ),),
-              // Adiciona um espaço entre a imagem e o texto
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Text(
-                  'Olá, $name',
-                  style: GoogleFonts.getFont(
-                    'Lato',
-                    fontSize: 30,
-                    textStyle: TextStyle(color: Color.fromARGB(255, 254, 255, 255)),
-                  ),
+                  width: sizeContainerInfoUser * 0.7,
+                  height: sizeContainerInfoUser * 0.7,
                 ),
               ),
+              Container( 
+                padding: EdgeInsets.only(top: sizeContainerInfoUser * 0.6),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Image.asset(
+                      "assets/asset/imgs/accounts_screens/message.png",
+                      width: sizeContainerInfoUser * 0.2,
+                      height: sizeContainerInfoUser * 0.2,
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Olá, $name',
+                      style: GoogleFonts.getFont(
+                        'Lato',
+                        fontSize: sizeContainerInfoUser * 0.2,
+                        textStyle: TextStyle(
+                          color: theme.colorScheme.onSecondary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
       ),
-      body: 
-      UserBodyConstructor(saldo: '30.000,00'),
-      backgroundColor: Color.fromARGB(255, 254, 255, 255),
+      body: UserBodyConstructor(saldo: '30.000,00', bodyHeight: screenInfo.screenHeight - appBarHeight),
+  
     );
   }
 }
 
-
-
 class UserBodyConstructor extends StatelessWidget {
   final String saldo;
-
-  const UserBodyConstructor({Key? key, required this.saldo}) : super(key: key);
+  double? bodyHeight;
+  UserBodyConstructor({Key? key, required this.saldo, this.bodyHeight}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-      padding: EdgeInsets.only(left: 20, bottom: 20, top: 20, right: 20),
+    ScreenInfo screenInfo = getScreenInformation(context);
+    
+    bodyHeight ??= screenInfo.screenHeight - 120;
+    double paddingHeight = (bodyHeight!/5) * 0.2;
+    double buttonHeight = (bodyHeight! - paddingHeight * 4) / 5;
+  
+
+    return Container( height: bodyHeight! + paddingHeight,
+    alignment: Alignment.center,
+      padding: EdgeInsets.only(left: 20, bottom:paddingHeight, top: paddingHeight, right: 20),
       child: Column(
-        
         children: <Widget>[
           //saldo conta e valor
-          Container( padding: EdgeInsets.only(left: 20, bottom: 20, top: 20, right: 20),
+          Container( height: buttonHeight + paddingHeight,
+            padding: EdgeInsets.only(left: 20, bottom:paddingHeight, top: paddingHeight, right: 20),
             child: Column(
-              
               children: [
-                
                 Row(
-                  
                   children: [
                     Text(
                       'Saldo Conta',
                       style: GoogleFonts.getFont(
                         'Lato',
-                        fontSize: 30,
-                        textStyle: TextStyle(color: Color(0xFF333333)),
+                        fontSize: buttonHeight * 0.30,
+                        textStyle: TextStyle(color: theme.colorScheme.onPrimary),
                       ),
                     )
                   ],
@@ -110,8 +129,8 @@ class UserBodyConstructor extends StatelessWidget {
                       'R\$ $saldo',
                       style: GoogleFonts.getFont(
                         'Lato',
-                        fontSize: 20,
-                        textStyle: TextStyle(color: Color(0xFF333333)),
+                        fontSize: buttonHeight * 0.20,
+                        textStyle: TextStyle(color: theme.colorScheme.onPrimary),
                       ),
                     )
                   ],
@@ -121,46 +140,74 @@ class UserBodyConstructor extends StatelessWidget {
           ),
 
           // os tres botoes juntos (movimentar - cartao - conta)
-          Container(
-            padding: EdgeInsets.only(left: 20, bottom: 20, top: 20, right: 20),
+          Container( width: screenInfo.screenWidth * 0.8,
+                    height: buttonHeight + paddingHeight ,
+                    
+            //padding: EdgeInsets.only(bottom:paddingHeight, top: paddingHeight),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
                   children: [
-                    UserButtonBodyConstructor(
-                      localIcon: 'assets/asset/imgs/accounts_screens/movimentar.png',
-                      textLabel: 'Movimentar',
+                    UserButtonBodyConstructor( 
+                      localIcon:
+                          'assets/asset/imgs/accounts_screens/movimentar.png',
+                      heightButton: buttonHeight * 0.8, textLabel: 'Movimentar', widthButton: 80.0,
+                    
                     )
                   ],
                 ),
                 Column(
                   children: [
-                    UserButtonBodyConstructor(
+                    UserButtonBodyConstructor( 
                       localIcon: 'assets/asset/imgs/accounts_screens/card.png',
-                      textLabel: 'Cartão',
+                      heightButton: buttonHeight * 0.8, textLabel: 'Cartão', widthButton: 80.0,
                     )
                   ],
                 ),
                 Column(
                   children: [
-                    UserButtonBodyConstructor(
-                      localIcon: 'assets/asset/imgs/accounts_screens/user_account.png',
-                      textLabel: 'Conta',
+                    UserButtonBodyConstructor( 
+                      localIcon:
+                          'assets/asset/imgs/accounts_screens/user_account.png',
+                      heightButton: buttonHeight * 0.8, textLabel: 'Conta', widthButton: 80.0,
                     )
                   ],
                 )
               ],
             ),
           ),
+        
           // acessar beneficios
-          Container( padding: EdgeInsets.only(left: 20, bottom: 20, top: 20, right: 20),
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [UserButtonBodyConstructor(localIcon: 'assets/asset/imgs/accounts_screens/beneficios.png', textLabel: "Acessar Beneficios", widthBottton: 115.0,)],),
+          Container( height: buttonHeight + paddingHeight,
+            //padding: EdgeInsets.only( bottom:paddingHeight, top: paddingHeight),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                UserButtonBodyConstructor( 
+                  localIcon:
+                      'assets/asset/imgs/accounts_screens/beneficios.png',
+                  heightButton: buttonHeight * 0.8, textLabel: "Acessar Beneficios",
+                 
+                
+                )
+              ],
+            ),
           ),
           // Ultima Transação
-          Container( padding: EdgeInsets.only(left: 20, bottom: 20, top: 20, right: 20),
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [UserButtonBodyConstructor(localIcon: 'assets/asset/imgs/accounts_screens/beneficios.png', textLabel: "Ultima Transação", widthBottton: 115.0,)],),
+          Container( height: buttonHeight + paddingHeight,
+            //padding: EdgeInsets.only( bottom:paddingHeight, top: paddingHeight),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                UserButtonBodyConstructor( 
+                  localIcon:
+                      'assets/asset/imgs/accounts_screens/beneficios.png',
+                  heightButton: buttonHeight * 0.8, textLabel: "Ultima Transação",
+                )
+              ],
+            ),
           )
         ],
       ),
@@ -168,4 +215,3 @@ class UserBodyConstructor extends StatelessWidget {
     //);
   }
 }
-
