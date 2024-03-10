@@ -25,8 +25,10 @@ class UserButtonBodyConstructor extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
             elevation: 4.0,
-            backgroundColor: Color(0xFF008080)),
+            backgroundColor: Color(0xFFF7F7F7)),
       ),
+
+
       Text('$textLabel',
           style: GoogleFonts.getFont(
             'Lato',

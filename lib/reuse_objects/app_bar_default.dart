@@ -11,7 +11,7 @@ class MyAppBarPageConstructor {
             bottomRight: Radius.circular(30.0),
           ),
         ),
-        backgroundColor: Color(0xFF008080),
+        backgroundColor: Color(0xFFed145b),
         
         title: Text(title,
             style: GoogleFonts.getFont('Lato',
