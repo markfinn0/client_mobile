@@ -1,39 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/reuse_objects/screen_dimensions.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'color_theme.dart';
 class UserButtonBodyConstructor extends StatelessWidget {
   final String localIcon;
   final String textLabel;
-  final double heightBotton;
-  final double widthBottton;
+  double? heightButton;
+  double? widthButton;
 
-  const UserButtonBodyConstructor(
-      {Key? key, required this.localIcon, required this.textLabel, this.heightBotton = 6.0, this.widthBottton = 3.0})
+  UserButtonBodyConstructor(
+      {Key? key, required this.localIcon, required this.textLabel, this.heightButton, this.widthButton})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      ElevatedButton(
+    ThemeData theme = apptheme;
+    ScreenInfo screenInfo = getScreenInformation(context);
+    widthButton ??= screenInfo.screenWidth * 0.8;
+    heightButton ??= 70.0;
+    double widthImage = widthButton! * 0.8;
+    double heightImage = heightButton! * 0.8;
+    double textFontSize = heightButton! * 0.2;
+    return Column(
+      children: [
+        SizedBox( width: widthButton,
+        height: heightButton,
+          child: ElevatedButton(
         onPressed: () {},
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: widthBottton, vertical: heightBotton),
-          child: Image.asset('$localIcon', width: 50, height: 50),
+          padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+          
+          child: Image.asset('$localIcon', width: widthImage, height: heightImage),
         ),
+        
         style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
             elevation: 4.0,
-            backgroundColor: Color(0xFFF7F7F7)),
+            backgroundColor: theme.colorScheme.primary),
       ),
-
-
+        ),
+      
+      
       Text('$textLabel',
           style: GoogleFonts.getFont(
             'Lato',
-            fontSize: 15,
-            textStyle: TextStyle(color: Color(0xFF333333)),
+            fontSize: textFontSize,
+            textStyle: TextStyle(color: theme.colorScheme.onPrimary),
           ))
     ]);
   }
