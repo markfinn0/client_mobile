@@ -1,25 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/reuse_objects/button_home.dart';
 import 'package:flutter_application/reuse_objects/screen_dimensions.dart';
+import 'package:flutter_application/screens/benefits_screens/benefits_screen.dart';
+import 'package:flutter_application/screens/cards_screens/squelet_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_application/reuse_objects/color_theme.dart';
+
 //component without state - statelessswidget
 ThemeData theme = apptheme;
 
-class MyHomePage extends StatelessWidget {
-  
-  const MyHomePage({Key? key}) : super(key: key);
-  //decorater
-  
-  @override
-  Widget build(BuildContext context) {
-    
-    return MaterialApp(
-      title: 'Home page',
-      home: MyHomePageConstructor(name: 'Vitor Manoel'),
-    );
-  }
-}
 
 class MyHomePageConstructor extends StatelessWidget {
   final String name;
@@ -30,8 +19,6 @@ class MyHomePageConstructor extends StatelessWidget {
     ScreenInfo screenInfo = getScreenInformation(context);
     double appBarHeight = screenInfo.screenHeight * 0.2;
     double sizeContainerInfoUser = appBarHeight * 0.7;
-    
-    print(sizeContainerInfoUser);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: appBarHeight,
@@ -41,9 +28,9 @@ class MyHomePageConstructor extends StatelessWidget {
             bottomRight: Radius.circular(30.0),
           ),
         ),
-        backgroundColor: theme.colorScheme.secondary, 
-        flexibleSpace: Container( 
-         padding: EdgeInsets.only(left: 5, right: 20),
+        backgroundColor: theme.colorScheme.secondary,
+        flexibleSpace: Container(
+          padding: EdgeInsets.only(left: 5, right: 20),
           child: Row(
             children: <Widget>[
               Expanded(
@@ -53,7 +40,7 @@ class MyHomePageConstructor extends StatelessWidget {
                   height: sizeContainerInfoUser * 0.7,
                 ),
               ),
-              Container( 
+              Container(
                 padding: EdgeInsets.only(top: sizeContainerInfoUser * 0.6),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -81,8 +68,9 @@ class MyHomePageConstructor extends StatelessWidget {
           ),
         ),
       ),
-      body: UserBodyConstructor(saldo: '30.000,00', bodyHeight: screenInfo.screenHeight - appBarHeight),
-  
+      body: UserBodyConstructor(
+          saldo: '30.000,00',
+          bodyHeight: screenInfo.screenHeight - appBarHeight),
     );
   }
 }
@@ -90,25 +78,29 @@ class MyHomePageConstructor extends StatelessWidget {
 class UserBodyConstructor extends StatelessWidget {
   final String saldo;
   double? bodyHeight;
-  UserBodyConstructor({Key? key, required this.saldo, this.bodyHeight}) : super(key: key);
+  UserBodyConstructor({Key? key, required this.saldo, this.bodyHeight})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ScreenInfo screenInfo = getScreenInformation(context);
-    
-    bodyHeight ??= screenInfo.screenHeight - 120;
-    double paddingHeight = (bodyHeight!/5) * 0.2;
-    double buttonHeight = (bodyHeight! - paddingHeight * 4) / 5;
-  
 
-    return Container( height: bodyHeight! + paddingHeight,
-    alignment: Alignment.center,
-      padding: EdgeInsets.only(left: 20, bottom:paddingHeight, top: paddingHeight, right: 20),
+    bodyHeight ??= screenInfo.screenHeight - 120;
+    double paddingHeight = (bodyHeight! / 5) * 0.2;
+    double buttonHeight = (bodyHeight! - paddingHeight * 4) / 5;
+
+    return Container(
+      height: bodyHeight! + paddingHeight,
+      alignment: Alignment.center,
+      padding: EdgeInsets.only(
+          left: 20, bottom: paddingHeight, top: paddingHeight, right: 20),
       child: Column(
         children: <Widget>[
           //saldo conta e valor
-          Container( height: buttonHeight + paddingHeight,
-            padding: EdgeInsets.only(left: 20, bottom:paddingHeight, top: paddingHeight, right: 20),
+          Container(
+            height: buttonHeight + paddingHeight,
+            padding: EdgeInsets.only(
+                left: 20, bottom: paddingHeight, top: paddingHeight, right: 20),
             child: Column(
               children: [
                 Row(
@@ -118,7 +110,8 @@ class UserBodyConstructor extends StatelessWidget {
                       style: GoogleFonts.getFont(
                         'Lato',
                         fontSize: buttonHeight * 0.30,
-                        textStyle: TextStyle(color: theme.colorScheme.onPrimary),
+                        textStyle:
+                            TextStyle(color: theme.colorScheme.onPrimary),
                       ),
                     )
                   ],
@@ -130,7 +123,8 @@ class UserBodyConstructor extends StatelessWidget {
                       style: GoogleFonts.getFont(
                         'Lato',
                         fontSize: buttonHeight * 0.20,
-                        textStyle: TextStyle(color: theme.colorScheme.onPrimary),
+                        textStyle:
+                            TextStyle(color: theme.colorScheme.onPrimary),
                       ),
                     )
                   ],
@@ -140,9 +134,10 @@ class UserBodyConstructor extends StatelessWidget {
           ),
 
           // os tres botoes juntos (movimentar - cartao - conta)
-          Container( width: screenInfo.screenWidth * 0.8,
-                    height: buttonHeight + paddingHeight ,
-                    
+          Container(
+            width: screenInfo.screenWidth * 0.8,
+            height: buttonHeight + paddingHeight,
+
             //padding: EdgeInsets.only(bottom:paddingHeight, top: paddingHeight),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -150,62 +145,100 @@ class UserBodyConstructor extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    UserButtonBodyConstructor( 
-                      localIcon:
-                          'assets/asset/imgs/accounts_screens/movimentar.png',
-                      heightButton: buttonHeight * 0.8, textLabel: 'Movimentar', widthButton: 80.0,
-                    
-                    )
+                    UserButtonBodyConstructor(
+                        localIcon:
+                            'assets/asset/imgs/accounts_screens/movimentar.png',
+                        heightButton: buttonHeight * 0.8,
+                        textLabel: 'Movimentar',
+                        widthButton: 80.0,
+                        pageNavigate: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MyBenefitsPageConstructorConstructor()),
+                          );
+                        })
                   ],
                 ),
                 Column(
                   children: [
-                    UserButtonBodyConstructor( 
-                      localIcon: 'assets/asset/imgs/accounts_screens/card.png',
-                      heightButton: buttonHeight * 0.8, textLabel: 'Cartão', widthButton: 80.0,
-                    )
+                    UserButtonBodyConstructor(
+                        localIcon:
+                            'assets/asset/imgs/accounts_screens/card.png',
+                        heightButton: buttonHeight * 0.8,
+                        textLabel: 'Cartão',
+                        widthButton: 80.0,
+                        pageNavigate: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MyBenefitsPageConstructorConstructor()),
+                          );
+                        })
                   ],
                 ),
                 Column(
                   children: [
-                    UserButtonBodyConstructor( 
-                      localIcon:
-                          'assets/asset/imgs/accounts_screens/user_account.png',
-                      heightButton: buttonHeight * 0.8, textLabel: 'Conta', widthButton: 80.0,
-                    )
+                    UserButtonBodyConstructor(
+                        localIcon:
+                            'assets/asset/imgs/accounts_screens/user_account.png',
+                        heightButton: buttonHeight * 0.8,
+                        textLabel: 'Conta',
+                        widthButton: 80.0,
+                        pageNavigate: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MyBenefitsPageConstructorConstructor()),
+                          );
+                        })
                   ],
                 )
               ],
             ),
           ),
-        
+
           // acessar beneficios
-          Container( height: buttonHeight + paddingHeight,
+          Container(
+            height: buttonHeight + paddingHeight,
             //padding: EdgeInsets.only( bottom:paddingHeight, top: paddingHeight),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                UserButtonBodyConstructor( 
-                  localIcon:
-                      'assets/asset/imgs/accounts_screens/beneficios.png',
-                  heightButton: buttonHeight * 0.8, textLabel: "Acessar Beneficios",
-                 
-                
-                )
+                UserButtonBodyConstructor(
+                    localIcon:
+                        'assets/asset/imgs/accounts_screens/beneficios.png',
+                    heightButton: buttonHeight * 0.8,
+                    textLabel: "Acessar Beneficios",
+                    pageNavigate: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MyBenefitsPageConstructorConstructor()),
+                      );
+                    })
               ],
             ),
           ),
           // Ultima Transação
-          Container( height: buttonHeight + paddingHeight,
+          Container(
+            height: buttonHeight + paddingHeight,
             //padding: EdgeInsets.only( bottom:paddingHeight, top: paddingHeight),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                UserButtonBodyConstructor( 
-                  localIcon:
-                      'assets/asset/imgs/accounts_screens/beneficios.png',
-                  heightButton: buttonHeight * 0.8, textLabel: "Ultima Transação",
-                )
+                UserButtonBodyConstructor(
+                    localIcon:
+                        'assets/asset/imgs/accounts_screens/beneficios.png',
+                    heightButton: buttonHeight * 0.8,
+                    textLabel: "Ultima Transação",
+                    pageNavigate: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MyBenefitsPageConstructorConstructor()),
+                      );
+                    })
               ],
             ),
           )
