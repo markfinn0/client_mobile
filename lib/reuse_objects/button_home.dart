@@ -7,9 +7,9 @@ class UserButtonBodyConstructor extends StatelessWidget {
   final String textLabel;
   double? heightButton;
   double? widthButton;
-
+  Function? pageNavigate;
   UserButtonBodyConstructor(
-      {Key? key, required this.localIcon, required this.textLabel, this.heightButton, this.widthButton})
+      {Key? key, required this.localIcon, required this.textLabel, this.heightButton, this.widthButton, required this.pageNavigate})
       : super(key: key);
 
   @override
@@ -26,7 +26,9 @@ class UserButtonBodyConstructor extends StatelessWidget {
         SizedBox( width: widthButton,
         height: heightButton,
           child: ElevatedButton(
-        onPressed: () {},
+        onPressed: (){
+          pageNavigate!();
+        } ,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
           
