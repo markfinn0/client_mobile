@@ -7,17 +7,24 @@ import 'package:flutter_application/reuse_objects/color_theme.dart';
 import 'package:flutter_application/reuse_objects/screen_dimensions.dart';
 ThemeData theme = apptheme;
 
+
+
 class UserInputBodyConstructor extends StatelessWidget {
   
   double? widhtText ;
-  UserInputBodyConstructor({Key? key, this.widhtText}) : super(key: key);
+  double? heightText ;
+  UserInputBodyConstructor({Key? key, 
+  this.widhtText,
+  this.heightText
+  }) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
     ScreenInfo screenInfo = getScreenInformation(context);
     widhtText = screenInfo.screenWidth * 0.8;
-
+    heightText ??= 20;
     return Container( width: widhtText,
+      //height: heightText,
       child: Column( //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -26,7 +33,7 @@ class UserInputBodyConstructor extends StatelessWidget {
                 "Digite o valor: ",
                 style: GoogleFonts.getFont(
                   'Lato',
-                  fontSize: 20,
+                  fontSize: heightText! * 0.8,
                   color: theme.colorScheme.onPrimary
                 ),
               )
@@ -35,12 +42,22 @@ class UserInputBodyConstructor extends StatelessWidget {
 
           Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
-              child: TextField( 
-                decoration: InputDecoration(  
+              child: TextField( textAlign: TextAlign.end,
+                decoration: InputDecoration(
+                  //Icons.attach_money_sharp
+                  //Icon(Icons.attach_money_sharp, color: Colors.green,)
+                  //Icon(Icons.money_off, color: Colors.red,)
+                  prefixIcon: Icon(Icons.attach_money_sharp, color: Colors.green,),
                   border: OutlineInputBorder(),
-                  hintText: "Insira o Texto",
+                  hintText: "100,00", hintStyle: GoogleFonts.getFont( 
+                  'Lato',
+                  fontSize: heightText! * 0.8,
+                  color: theme.colorScheme.onPrimary
+                ),
+                  contentPadding: EdgeInsets.symmetric(vertical: heightText!),
                   
                 ),
+              
               ))
         ],
       ),
