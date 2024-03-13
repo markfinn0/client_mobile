@@ -18,8 +18,8 @@ class UserButtonBodyConstructor extends StatelessWidget {
     ScreenInfo screenInfo = getScreenInformation(context);
     widthButton ??= screenInfo.screenWidth * 0.8;
     heightButton ??= 70.0;
-    double widthImage = widthButton! * 0.8;
-    double heightImage = heightButton! * 0.8;
+    double widthImage = widthButton! * 0.5;
+    double heightImage = heightButton! * 0.5;
     double textFontSize = heightButton! * 0.2;
     return Column(
       children: [

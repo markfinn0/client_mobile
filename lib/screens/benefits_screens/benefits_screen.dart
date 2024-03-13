@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/reuse_objects/button_home.dart';
 import 'package:flutter_application/reuse_objects/app_bar_default.dart';
 import 'package:flutter_application/reuse_objects/screen_dimensions.dart';
+import 'package:flutter_application/screens/benefits_screens/all_benefits_companies.dart';
 import 'package:flutter_application/screens/benefits_screens/benefits_historic.dart';
 import 'package:flutter_application/screens/benefits_screens/put_balance_in_account.dart';
 import 'package:flutter_application/screens/cards_screens/squelet_model.dart';
@@ -28,7 +29,7 @@ class MyBenefitsPageConstructorConstructor extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenInfo screenInfo = getScreenInformation(context);
     AppBar myAppBar = MyAppBarPageConstructorWithReturn.buildAppBar(
-        context, "Meus Beneficios", () {
+        context, title: "Meus Beneficios", () {
       Navigator.of(context).pop();
     });
     double? appBarHeight = myAppBar.toolbarHeight;
@@ -146,7 +147,7 @@ class MyBenefitsBodyPageConstructor extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MyBenefitsHistoricPageConstructor()),
+                            builder: (context) => const MyAllBenefitsCompaniesPageConstructor()),
                       );
                     })
               ],

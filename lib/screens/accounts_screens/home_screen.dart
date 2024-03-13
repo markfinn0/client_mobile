@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application/reuse_objects/button_home.dart';
 import 'package:flutter_application/reuse_objects/screen_dimensions.dart';
@@ -9,7 +11,6 @@ import 'package:flutter_application/reuse_objects/color_theme.dart';
 //component without state - statelessswidget
 ThemeData theme = apptheme;
 
-
 class MyHomePageConstructor extends StatelessWidget {
   final String name;
   const MyHomePageConstructor({Key? key, required this.name}) : super(key: key);
@@ -20,58 +21,71 @@ class MyHomePageConstructor extends StatelessWidget {
     double appBarHeight = screenInfo.screenHeight * 0.2;
     double sizeContainerInfoUser = appBarHeight * 0.7;
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: appBarHeight,
-        elevation: 0.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(30.0),
-          ),
+  appBar: PreferredSize(
+    preferredSize: Size.fromHeight(appBarHeight),
+    child: Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(30.0),
         ),
-        backgroundColor: theme.colorScheme.secondary,
-        flexibleSpace: Container(
-          padding: EdgeInsets.only(left: 5, right: 20),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: Image.asset(
-                  'assets/asset/imgs/accounts_screens/user_icon.png',
-                  width: sizeContainerInfoUser * 0.7,
-                  height: sizeContainerInfoUser * 0.7,
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(top: sizeContainerInfoUser * 0.6),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Image.asset(
-                      "assets/asset/imgs/accounts_screens/message.png",
-                      width: sizeContainerInfoUser * 0.2,
-                      height: sizeContainerInfoUser * 0.2,
+        color: theme.colorScheme.secondary,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(30.0),
+        ),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 25, sigmaY: 25),
+          child: Container(
+            color: Colors.white.withOpacity(0.1),
+            child: Container(
+              padding: EdgeInsets.only(left: 5, right: 20),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Image.asset(
+                      'assets/asset/imgs/accounts_screens/user_icon.png',
+                      width: sizeContainerInfoUser * 0.7,
+                      height: sizeContainerInfoUser * 0.7,
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Olá, $name',
-                      style: GoogleFonts.getFont(
-                        'Lato',
-                        fontSize: sizeContainerInfoUser * 0.2,
-                        textStyle: TextStyle(
-                          color: theme.colorScheme.onSecondary,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: sizeContainerInfoUser * 0.6),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Image.asset(
+                          "assets/asset/imgs/accounts_screens/message.png",
+                          width: sizeContainerInfoUser * 0.2,
+                          height: sizeContainerInfoUser * 0.2,
                         ),
-                      ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Olá, $name',
+                          style: GoogleFonts.getFont(
+                            'Lato',
+                            fontSize: sizeContainerInfoUser * 0.2,
+                            textStyle: TextStyle(
+                              color: theme.colorScheme.onSecondary,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              )
-            ],
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),
-      body: UserBodyConstructor(
-          saldo: '30.000,00',
-          bodyHeight: screenInfo.screenHeight - appBarHeight),
-    );
+    ),
+  ),
+  body: UserBodyConstructor(
+    saldo: '30.000,00',
+    bodyHeight: screenInfo.screenHeight - appBarHeight,
+  ),
+);
   }
 }
 
@@ -155,7 +169,8 @@ class UserBodyConstructor extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const MyBenefitsPageConstructorConstructor()),
+                                builder: (context) =>
+                                    const MyBenefitsPageConstructorConstructor()),
                           );
                         })
                   ],
@@ -172,7 +187,8 @@ class UserBodyConstructor extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const MyBenefitsPageConstructorConstructor()),
+                                builder: (context) =>
+                                    const MyBenefitsPageConstructorConstructor()),
                           );
                         })
                   ],
@@ -189,7 +205,8 @@ class UserBodyConstructor extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const MyBenefitsPageConstructorConstructor()),
+                                builder: (context) =>
+                                    const MyBenefitsPageConstructorConstructor()),
                           );
                         })
                   ],
@@ -214,7 +231,8 @@ class UserBodyConstructor extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MyBenefitsPageConstructorConstructor()),
+                            builder: (context) =>
+                                const MyBenefitsPageConstructorConstructor()),
                       );
                     })
               ],
@@ -236,7 +254,8 @@ class UserBodyConstructor extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MyBenefitsPageConstructorConstructor()),
+                            builder: (context) =>
+                                const MyBenefitsPageConstructorConstructor()),
                       );
                     })
               ],

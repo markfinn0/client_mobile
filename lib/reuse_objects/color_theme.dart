@@ -16,10 +16,10 @@ final ThemeData apptheme = ThemeData(
         brightness: Brightness.light,
         primary: Color(0xFFF7F7F7),
         onPrimary: Color(0xFF333333),
-        secondary: Color(0xFFed145b),
+        secondary: Color(0xFF2ECC71),
         onSecondary: Color(0xFF333333),
         error: Color(0xFFFFD300), //isn't defined
-        onError: Color(0xFFed145b),  //isn't defined
+        onError: Color(0xFF2ECC71),  //isn't defined
         background: Color(0xFFFFFFFF), //background totally white color, this color is default background flutter color.
         onBackground: Color(0xFF333333),
         surface: Color(0xFFF7F7F7),

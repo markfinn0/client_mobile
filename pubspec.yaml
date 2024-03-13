@@ -64,6 +64,7 @@ flutter:
   assets:
      - assets/asset/imgs/accounts_screens/
      - assets/asset/imgs/benefits_screens/
+     - assets/asset/imgs/companies_img/
         
   #   - images/a_dot_ham.jpeg
 

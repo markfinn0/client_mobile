@@ -27,7 +27,7 @@ class MyBenefitsPutBalanceAccountPageConstructor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppBar myAppBar = MyAppBarPageConstructorWithReturn.buildAppBar(
-          context, "Meus Beneficios", () {Navigator.pop(context);});
+          context, title: "Meus Beneficios", () {Navigator.pop(context);});
      double? appBarHeight = myAppBar.toolbarHeight;
      ScreenInfo screenInfo = getScreenInformation(context);
     return Scaffold(

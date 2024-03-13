@@ -23,7 +23,7 @@ class MyBenefitsHistoricPageConstructor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppBar myAppBar = MyAppBarPageConstructorWithReturn.buildAppBar(
-        context, "Historico Beneficios", () {
+        context, title: "Historico Beneficios", () {
           Navigator.of(context).pop();
         });
     double? appBarHeight = myAppBar.toolbarHeight;
